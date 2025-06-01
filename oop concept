@@ -1,0 +1,503 @@
+
+    //1. Write a Java program to create a class called "Circle" with a radius attribute. You can access this attribute using setter and getter method. Calculate the area and circumference of the circle.
+public class Circle {
+    private double radius;
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+
+    public double calculateCircumference() {
+        return 2 * Math.PI * radius;
+    }
+
+    public static void main(String[] args) {
+        Circle circle = new Circle();
+        circle.setRadius(5.0);
+        
+        System.out.println("Radius: " + circle.getRadius());
+        System.out.println("Area: " + circle.calculateArea());
+        System.out.println("Circumference: " + circle.calculateCircumference());
+    }
+}
+//2. Write a Java program to create a class called “Simple Interest” with a data fields principle, time and rate, using setter getter method and print the values.
+public class SimpleInterest {
+    private double principle;
+    private double time;
+    private double rate;
+
+    public double getPrinciple() {
+        return principle;
+    }
+
+    public void setPrinciple(double principle) {
+        this.principle = principle;
+    }
+
+    public double getTime() {
+        return time;
+    }
+
+    public void setTime(double time) {
+        this.time = time;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    public double calculateInterest() {
+        return (principle * time * rate) / 100;
+    }
+
+    public static void main(String[] args) {
+        SimpleInterest si = new SimpleInterest();
+        si.setPrinciple(1000);
+        si.setTime(2);
+        si.setRate(5);
+        
+        System.out.println("Principle: " + si.getPrinciple());
+        System.out.println("Time: " + si.getTime());
+        System.out.println("Rate: " + si.getRate());
+        System.out.println("Simple Interest: " + si.calculateInterest());
+    }
+}
+//3. Write a Java program to create a class called "Dog" with a name and breed attribute. Create two instances of the "Dog" class, set their attributes using the constructor and modify the attributes using the setter methods and print the updated values.
+public class Dog {
+    private String name;
+    private String breed;
+
+    public Dog(String name, String breed) {
+        this.name = name;
+        this.breed = breed;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    public static void main(String[] args) {
+        Dog dog1 = new Dog("Buddy", "Golden Retriever");
+        Dog dog2 = new Dog("Max", "German Shepherd");
+        
+        System.out.println("Dog 1: " + dog1.getName() + ", " + dog1.getBreed());
+        System.out.println("Dog 2: " + dog2.getName() + ", " + dog2.getBreed());
+        
+        dog1.setName("Rocky");
+        dog2.setBreed("Labrador");
+        
+        System.out.println("After update:");
+        System.out.println("Dog 1: " + dog1.getName() + ", " + dog1.getBreed());
+        System.out.println("Dog 2: " + dog2.getName() + ", " + dog2.getBreed());
+    }
+}
+//4. Write a Java program to create a class called "Employee" with a name, job title, and salary attributes, and methods to calculate and update salary.
+public class Employee {
+    private String name;
+    private String jobTitle;
+    private double salary;
+
+    public Employee(String name, String jobTitle, double salary) {
+        this.name = name;
+        this.jobTitle = jobTitle;
+        this.salary = salary;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void updateSalary(double percentage) {
+        salary = salary + (salary * percentage / 100);
+    }
+
+    public static void main(String[] args) {
+        Employee emp = new Employee("John Doe", "Software Engineer", 50000);
+        
+        System.out.println("Name: " + emp.getName());
+        System.out.println("Job Title: " + emp.getJobTitle());
+        System.out.println("Salary: " + emp.getSalary());
+        
+        emp.updateSalary(10);
+        System.out.println("After 10% raise, new salary: " + emp.getSalary());
+    }
+}
+//ENCAPSULATION
+
+//1. You are developing an e-commerce application and need to implement a Product class. The Product class should have private instance variables for the product name, product ID, and price. Implement getter and setter methods for these variables, ensuring that the price cannot be negative. Additionally, include a private variable to track the stock quantity and provide public methods to update the stock when a product is purchased or restocked.
+public class Product {
+    private String name;
+    private String productID;
+    private double price;
+    private int stockQuantity;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        if (price >= 0) {
+            this.price = price;
+        }
+    }
+
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
+
+    public void purchase(int quantity) {
+        if (quantity > 0 && stockQuantity >= quantity) {
+            stockQuantity -= quantity;
+        }
+    }
+
+    public void restock(int quantity) {
+        if (quantity > 0) {
+            stockQuantity += quantity;
+        }
+    }
+
+    public static void main(String[] args) {
+        Product product = new Product();
+        product.setName("Laptop");
+        product.setProductID("P1001");
+        product.setPrice(999.99);
+        product.restock(50);
+        
+        System.out.println("Product: " + product.getName());
+        System.out.println("Price: $" + product.getPrice());
+        System.out.println("Stock: " + product.getStockQuantity());
+        
+        product.purchase(2);
+        System.out.println("After purchase, stock: " + product.getStockQuantity());
+    }
+}
+//2. You are building a banking application that has a BankAccount class. Implement the BankAccount class with encapsulation principles in mind. Include private instance variables for the account number, account holder name, and account balance. Provide public methods to allow clients to deposit and withdraw funds, as well as access the account balance. Ensure that the account balance cannot be accessed or modified directly.
+public class BankAccount {
+    private String accountNumber;
+    private String accountHolderName;
+    private double balance;
+
+    public BankAccount(String accountNumber, String accountHolderName, double initialBalance) {
+        this.accountNumber = accountNumber;
+        this.accountHolderName = accountHolderName;
+        this.balance = initialBalance;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
+
+    public void setAccountHolderName(String accountHolderName) {
+        this.accountHolderName = accountHolderName;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && balance >= amount) {
+            balance -= amount;
+        }
+    }
+
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount("123456789", "John Smith", 1000);
+        
+        System.out.println("Account Holder: " + account.getAccountHolderName());
+        System.out.println("Balance: $" + account.getBalance());
+        
+        account.deposit(500);
+        System.out.println("After deposit, balance: $" + account.getBalance());
+        
+        account.withdraw(200);
+        System.out.println("After withdrawal, balance: $" + account.getBalance());
+    }
+}
+//3. You are developing a library management system and need to implement a Book class. The Book class should have private instance variables for the book title, author name, and publication year. Implement appropriate getter and setter methods to ensure encapsulation. Additionally, include a private variable to track the availability of the book (e.g., true if available, false if borrowed), and provide a public method to borrow the book, updating its availability status.
+public class Book {
+    private String title;
+    private String author;
+    private int publicationYear;
+    private boolean isAvailable;
+
+    public Book(String title, String author, int publicationYear) {
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+        this.isAvailable = true;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public int getPublicationYear() {
+        return publicationYear;
+    }
+
+    public void setPublicationYear(int publicationYear) {
+        this.publicationYear = publicationYear;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void borrow() {
+        if (isAvailable) {
+            isAvailable = false;
+        }
+    }
+
+    public void returnBook() {
+        isAvailable = true;
+    }
+
+    public static void main(String[] args) {
+        Book book = new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925);
+        
+        System.out.println("Book: " + book.getTitle());
+        System.out.println("Available: " + book.isAvailable());
+        
+        book.borrow();
+        System.out.println("After borrowing, available: " + book.isAvailable());
+        
+        book.returnBook();
+        System.out.println("After returning, available: " + book.isAvailable());
+    }
+}
+//4. You are working on a student information system and need to create a Student class. The student class should have private instance variables for the student's name, ID number, and grade point average (GPA). Implement getter and setter methods for the name and ID number, ensuring that they can be accessed and modified only through these methods. However, the GPA should be read-only and can only be set within the class constructor.
+public class Student {
+    private String name;
+    private String idNumber;
+    private final double gpa;
+
+    public Student(String name, String idNumber, double gpa) {
+        this.name = name;
+        this.idNumber = idNumber;
+        this.gpa = gpa;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
+    }
+
+    public double getGpa() {
+        return gpa;
+    }
+
+    public static void main(String[] args) {
+        Student student = new Student("Alice Johnson", "S12345", 3.8);
+        
+        System.out.println("Student: " + student.getName());
+        System.out.println("ID: " + student.getIdNumber());
+        System.out.println("GPA: " + student.getGpa());
+        
+        student.setName("Alice Smith");
+        System.out.println("After name change: " + student.getName());
+    }
+}
+//5. You are building an employee management system and need to create an Employee  class. The Employee class should have private instance variables for the employee name, employee ID, and salary. Implement getter and setter methods for the name and ID, but ensure that the salary can only be updated through a specific method that increases or decreases the amount while preventing negative values.
+public class Employee {
+    private String name;
+    private String employeeId;
+    private double salary;
+
+    public Employee(String name, String employeeId, double salary) {
+        this.name = name;
+        this.employeeId = employeeId;
+        this.salary = salary;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void adjustSalary(double amount) {
+        if (salary + amount >= 0) {
+            salary += amount;
+        }
+    }
+
+    public static void main(String[] args) {
+        Employee emp = new Employee("Robert Johnson", "E1001", 60000);
+        
+        System.out.println("Employee: " + emp.getName());
+        System.out.println("Salary: $" + emp.getSalary());
+        
+        emp.adjustSalary(5000);
+        System.out.println("After raise, salary: $" + emp.getSalary());
+        
+        emp.adjustSalary(-2000);
+        System.out.println("After deduction, salary: $" + emp.getSalary());
+    }
+}
+//6. You are designing a car rental system, and you need to create a Car class. The Car class should have private instance variables for the car's make, model, and rental price per day. Implement appropriate getter and setter methods for these variables, ensuring that the make and model can only be set once during object creation. Additionally, include a private variable to track the availability of the car (e.g., true if available for rent, false if rented), and provide public methods to rent and return the car, updating its availability status.
+public class Car {
+    private final String make;
+    private final String model;
+    private double rentalPricePerDay;
+    private boolean isAvailable;
+
+    public Car(String make, String model, double rentalPricePerDay) {
+        this.make = make;
+        this.model = model;
+        this.rentalPricePerDay = rentalPricePerDay;
+        this.isAvailable = true;
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public double getRentalPricePerDay() {
+        return rentalPricePerDay;
+    }
+
+    public void setRentalPricePerDay(double rentalPricePerDay) {
+        if (rentalPricePerDay > 0) {
+            this.rentalPricePerDay = rentalPricePerDay;
+        }
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void rent() {
+        if (isAvailable) {
+            isAvailable = false;
+        }
+    }
+
+    public void returnCar() {
+        isAvailable = true;
+    }
+
+    public static void main(String[] args) {
+        Car car = new Car("Toyota", "Camry", 50.0);
+        
+        System.out.println("Car: " + car.getMake() + " " + car.getModel());
+        System.out.println("Available: " + car.isAvailable());
+        
+        car.rent();
+        System.out.println("After renting, available: " + car.isAvailable());
+        
+        car.returnCar();
+        System.out.println("After returning, available: " + car.isAvailable());
+    }
+}
+    
+
